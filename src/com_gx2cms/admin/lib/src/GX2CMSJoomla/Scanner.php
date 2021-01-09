@@ -43,6 +43,8 @@ class Scanner
 
     public function getPages(): Pages {return empty($this->pages) ? new Pages([]) : $this->pages;}
 
+    public function getGlobalConfigData(): array {return $this->globalConfigData;}
+
     public function getGlobalConfigFile(): string {return $this->globalConfigFile;}
 
     private function validate(): void
@@ -58,6 +60,10 @@ class Scanner
         $this->globalConfigData = json_decode(file_get_contents($this->globalConfigFile), true);
         if (empty($this->globalConfigData)) {
             new Error($this->globalConfigFile.' cannot be error', 500);
+        }
+        $i18n = dirname($this->globalConfigFile).DIRECTORY_SEPARATOR.'i18n.json';
+        if (file_exists($i18n)) {
+            $this->globalConfigData['i18n'] = json_decode(file_get_contents($i18n), true);
         }
         $this->loadPages();
     }

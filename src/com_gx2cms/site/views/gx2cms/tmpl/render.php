@@ -21,7 +21,10 @@ try {
     if (!empty($file)) {
         $page = $scanner->getPages()->getChild($file);
         $properties = $page->getProperties()->getAsArray();
-        Hbs::setGlobalContext(['currentPage' => isset($properties['properties']) ? $properties['properties'] : $properties]);
+        Hbs::setGlobalContext(array_merge(
+            ['currentPage' => isset($properties['properties']) ? $properties['properties'] : $properties],
+            $scanner->getGlobalConfigData()
+        ));
         die(Hbs::render(
             $page->getFSFile(),
             $properties,
