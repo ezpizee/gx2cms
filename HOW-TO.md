@@ -22,7 +22,7 @@
     <li><b>structure</b>. This should be used to keep all pages, which include components.</li>
 </ul>
 <p>See example project here:<a href="https://github.com/ezpizee/gx2cms/blob/master/dist/com_gx2cms.zip" target="_blank">Example Project</a></p>
-<p><img class="width-300" src="/administrator/components/com_gx2cms/asset/images/folder-structure.png" /></p>
+<p><img class="width-300" src="https://github.com/ezpizee/gx2cms/blob/master/src/com_gx2cms/admin/asset/images/folder-structure.png" /></p>
 <hr />
 <h4 id="partial-include">Include Partial</h4>
 
