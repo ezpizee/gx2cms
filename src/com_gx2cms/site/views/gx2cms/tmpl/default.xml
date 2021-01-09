@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_GX2CMS_VIEW_DEFAULT_TITLE">
+        <message>COM_GX2CMS_VIEW_DEFAULT_DESC</message>
+    </layout>
+    <fields name="params">
+
+        <!-- Basic options. -->
+        <fieldset name="basic" label="COM_GX2CMS_SETTINGS">
+
+            <field
+                    name="gx2cms_project_root"
+                    type="textfield"
+                    label="COM_GX2CMS_FIELD_ROOT_PATH"
+                    description="COM_GX2CMS_FIELD_ROOT_PATH_DESC"
+                    default=""/>
+
+        </fieldset>
+
+    </fields>
+</metadata>

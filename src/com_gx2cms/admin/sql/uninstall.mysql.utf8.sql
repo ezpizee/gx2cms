@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `#__gx2cms`;

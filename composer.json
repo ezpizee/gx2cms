@@ -1,0 +1,33 @@
+{
+    "name": "webconsol/gx2cms",
+    "description": "GX2CMS Component",
+    "type": "library",
+    "keywords": [
+        "Joomla",
+        "GX2CMS",
+        "AEM",
+        "WordPress",
+        "Drupal"
+    ],
+    "homepage": "https://github.com/WEBCONSOL/GX2CMS",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Sothea Nim",
+            "homepage": "https://github.com/nimsothea",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Sokhon Pang",
+            "homepage": "https://github.com/pangkhon",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/WEBCONSOL/JoomlaConnector/issues",
+        "source": "https://github.com/WEBCONSOL/JoomlaConnector"
+    },
+    "require": {
+        "ezpizee/php-libs": "dev-master"
+    }
+}
