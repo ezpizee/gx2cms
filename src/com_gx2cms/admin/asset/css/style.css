@@ -6,11 +6,6 @@
 .icon-gx2cms {
     background-image: url(../images/icon.png);
 }
-.admin.com_gx2cms .contained-l {
-    margin: 20px auto;
-    width: 1024px;
-    padding: 10px;
-}
-.contained-l.border-ddd {
-    border: 1px solid #ddd;
+.width-300 {
+    width: 300px;
 }
