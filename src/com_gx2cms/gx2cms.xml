@@ -49,15 +49,7 @@
     </languages>
 
     <administration>
-        <menu link="#" img="/adminstrator/components/com_gx2cms/asset/images/icon.png">COM_GX2CMS_MENU</menu>
-        <submenu>
-            <menu link="option=com_gx2cms&amp;view=ezpz" view="ezpz"
-                  img="/adminstrator/components/com_gx2cms/asset/images/icon.png"
-                  alt="GX2CMS Portal / PORTAL">COM_GX2CMS_PORTAL</menu>
-            <menu link="option=com_gx2cms&amp;view=install" view="install"
-                  img="/adminstrator/components/com_gx2cms/asset/images/icon.png"
-                  alt="GX2CMS Portal / Install">COM_GX2CMS_INSTALL</menu>
-        </submenu>
+        <menu link="index.php?option=com_gx2cms" img="/adminstrator/components/com_gx2cms/asset/images/icon.png">COM_GX2CMS_MENU</menu>
         <!-- Note the folder attribute: This attribute describes the folder
             to copy FROM in the package to install therefore files copied
             in this section are copied from /admin/ in the package -->
