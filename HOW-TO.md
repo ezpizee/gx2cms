@@ -1,5 +1,6 @@
 <h2>GX2CMS Cheet Sheet</h2>
-<h4>Table Content</h4>
+<div id="toc">
+<h4>Table of Content</h4>
 <ul>
     <li><a href="#file-ext">File extension</a></li>
     <li><a href="#folder-structure">Folder Structure</a></li>
@@ -9,7 +10,10 @@
     <li><a href="#display-html">Display/Output HTML</a></li>
     <li><a href="#if-statement">IF Statement</a></li>
     <li><a href="#for-loop">For Loop</a></li>
+    <li><a href="#work-with-css-js">How to work CSS & JS</a></li>
+    <li><a href="#work-with-image">How to work images and files</a></li>
 </ul>
+</div>
 <hr />
 <h4 id="file-ext">File extension</h4>
 <p><b>.gx2cms</b></p>
@@ -26,11 +30,11 @@
     <li><b>structure</b>. This should be used to keep all pages, which include components.</li>
 </ul>
 <p>See example project here:<a href="https://github.com/ezpizee/gx2cms/blob/master/dist/com_gx2cms.zip" target="_blank">Example Project</a></p>
-<p><img class="width-300" src="https://github.com/ezpizee/gx2cms/blob/master/src/com_gx2cms/admin/asset/images/folder-structure.png" /></p>
+<p><img class="width-300" src="https://github.com/ezpizee/gx2cms/blob/master/src/com_gx2cms/admin/asset/images/folder-structure.png" alt="folder-structure" /></p>
 <hr />
 <h4 id="partial-include">Include Partial</h4>
 
-```
+```html
 <sly data-sly-include="/path/to/the/partial/file.gx2cms"></sly>
 ```
 
@@ -38,7 +42,7 @@
 <hr />
 <h4 id="include-resource">Include Resource</h4>
 
-```
+```html
 <sly data-sly-resource="${'/path/to/the/component'}"></sly>
 
 OR
@@ -64,7 +68,7 @@ OR
 <hr />
 <h4 id="string-literal">String Literal</h4>
 
-```
+```htl
 ${properties.test}
 
 OR
@@ -79,13 +83,13 @@ ${'Localized Hello World' @ i18n}
 <hr />
 <h4 id="display-html">Display/Output HTML</h4>
 
-```
-${properties.somevar @ context='html'}
+```html
+${properties.someRichtextVar @ context='html'}
 ```
 
 <h4 id="if-statement">If Statement</h4>
 
-```
+```html
 <sly data-sly-test="${properties.exists}">
     <p>Do something</p>
 </sly>
@@ -97,7 +101,7 @@ ${properties.somevar @ context='html'}
 <hr />
 <h4 id="for-loop">For Loop</h4>
 
-```
+```html
 <sly data-sly-test="${properties.list}"></sly>
     <ul class="my-list">
         <sly data-sly-list="${properties.list}">
@@ -107,3 +111,82 @@ ${properties.somevar @ context='html'}
 </sly>
 ```
 <p>It is used like any FOR-LOOP</p>
+<hr />
+<h4 id="work-with-css-js">How to work CSS & JS</h4>
+<p><b>Global CSS/JS</b> should be kept in:</p>
+<ul>
+<li>/clientlib/{project-folder}/css for CSS</li>
+<li>/clientlib/{project-folder}/js for JS</li>
+</ul>
+<p>Where <b>{project-folder}</b> is the same folder name as your project folder. 
+For instance, your project's name is "test", the name of that folder should also be "test". So, it would be 
+<b>/clientlib/test</b></p>
+<p><b>CSS/JS specific to the page (custom css)</b> should be kept in:</p>
+<ul>
+<li>/structure/{page-folder}/clientlib/css for CSS</li>
+<li>/structure/{page-folder}/clientlib/js for JS</li>
+</ul>
+<p>Where <b>{page-folder}</b> is the name of your page. 
+For instance, your project's name is "home", the folder structure would be 
+<b>/structure/home/clientlib/css</b>
+or <b>/structure/home/clientlib/js</b>
+</p>
+<p>Your page's specific CSS/JS will be loaded automatically to the page, when the page is loaded.</p>
+<p>Your <b>global CSS/JS</b> needs to be loaded with the following script, in your age:</p>
+
+```html
+<!-- for css; should go in the <head> section -->
+<sly data-sly-clientlib="['/clientlib/test']" data-type="css"></sly>
+<!-- for js; can go anywhere -->
+<sly data-sly-clientlib="['/clientlib/test']" data-type="js"></sly>
+``` 
+
+<p>In your /clientlib/{project-folder} and /structure/{page-folder}/clientlib, you should have:</p>
+<ul>
+<li><b>css.txt</b>, it is used to include any css files, which contained in the clientlib <b>css</b> folder, that you want to load</li>
+<li><b>js.txt</b>, it is used to include any js files, which contained in the clientlib <b>js</b> folder, that you want to load</li>
+</ul>
+
+<p>Any images/icons/fonts that you want to include in your CSS (both global and page specific) should be kept in:</p>
+<ul>
+<li>/clientlib/{project-folder}/images for global</li>
+<li>/structure/{page-folder}/clientlib/images for page specific</li>
+</ul>
+<p>You then can include them in your CSS code as you would do in a regular CSS development</p>
+<hr />
+<h4 id="work-with-image">How to work images and files</h4>
+<p>You can place your images that you need for your project (besides those for clientlib)
+any where under your project folder.</p>
+<p>However, our recommendation is to keep it as following:</p>
+<ul>
+<li>
+/{project-folder}/assets
+<ul>
+<li>/{project-folder}/assets/images</li>
+<li>/{project-folder}/assets/files</li>
+</ul>
+</li>
+</ul>
+<p>Here is how to include an image in your code like this:</p>
+
+```html
+<img src="/assets/images/{file-name}" alt="my image" data-render-asset="image"/>
+
+OR (if you have imagePath property in your model) 
+
+<img src="${properties.imagePath}" alt="my image" data-render-asset="image"/>
+```
+
+<p>Include <b>data-render-asset="image"</b> attribute to the image tag</p>
+
+<p>Here is how to link to a file in your code like this:</p>
+
+```html
+<a href="/assets/files/{file-name}" title="my file" data-render-asset="file">My File</a>
+
+OR (if you have imagePath property in your model) 
+
+<a href="${properties.imagePath}" title="my file" data-render-asset="file">My File</a>
+```
+
+<p>Include <b>data-render-asset="file"</b> attribute to the href tag</p>

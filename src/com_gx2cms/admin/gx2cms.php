@@ -11,12 +11,14 @@
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Access\Exception\NotAllowed as AccessExceptionNotAllowed;
+use Joomla\CMS\Document\Document;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Controller\BaseController;
 
 if (!defined('GX2CMS_DS')) {
     define('GX2CMS_DS', DIRECTORY_SEPARATOR);
+    define('GX2CMS_COMP_ROOT', __DIR__);
 }
 
 if (!file_exists(JPATH_LIBRARIES.GX2CMS_DS.'ezpzlib'.GX2CMS_DS.'autoload.php')) {
@@ -38,7 +40,10 @@ else {
 
     // Set some global property
     $document = Factory::getDocument();
-    $document->addStyleSheet(GX2CMSAdminHelper::assetRoot().'/css/style.css');
+    if ($document instanceof Document) {
+        $document->addStyleSheet(GX2CMSAdminHelper::assetRoot().'/css/style.css');
+        $document->addScript(GX2CMSAdminHelper::assetRoot().'/js/script.js');
+    }
 
     // Access check: is this user allowed to access the backend of this component?
     if (!Factory::getUser()->authorise('core.manage', 'com_gx2cms'))

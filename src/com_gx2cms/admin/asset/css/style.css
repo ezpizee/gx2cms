@@ -3,9 +3,18 @@
 .admin.com_gx2cms .subhead-collapse {
     display: none !important;
 }
-.icon-gx2cms {
-    background-image: url(../images/icon.png);
-}
-.width-300 {
+.admin.com_gx2cms .width-300 {
     width: 300px;
+}
+.admin.com_gx2cms .toc {
+    position:fixed;
+    top: 20px;
+    right: 0;
+    border: 1px solid #ddd;
+    background: #efefef;
+    width: 250px;
+    padding: 10px;
+}
+.admin.com_gx2cms .toc-content {
+    padding-right: 250px;
 }
