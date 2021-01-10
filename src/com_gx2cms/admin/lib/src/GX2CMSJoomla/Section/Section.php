@@ -1,6 +1,6 @@
 <?php
 
-namespace GX2CMSJoomla\Page;
+namespace GX2CMSJoomla\Section;
 
 use GX2CMSJoomla\Constants;
 use GX2CMSJoomla\Exception\Error;
@@ -9,7 +9,7 @@ use GX2CMSJoomla\Scanner;
 use GX2CMSJoomla\Utils\GX2CMSDate;
 use JsonSerializable;
 
-class Page implements JsonSerializable
+class Section implements JsonSerializable
 {
     /**
      * @var Properties
@@ -22,7 +22,7 @@ class Page implements JsonSerializable
     private $path = '';
 
     /**
-     * @var Pages
+     * @var Sections
      */
     private $children;
 
@@ -46,23 +46,20 @@ class Page implements JsonSerializable
         $this->init($properties, $path);
     }
 
-    public function addChild(Page $page, string $path): void
+    public function addChild(Section $page, string $path): void
     {
-        if ($this->children instanceof Pages) {
+        if ($this->children instanceof Sections) {
             $this->children->addChild($page, $path);
         }
     }
 
     public function isInvalid(): bool {return $this->isInvalid;}
 
-    public function get($key, $default=null)
-    {
-        return $this->properties->get($key, $default);
-    }
+    public function get($key, $default=null) {return $this->properties->get($key, $default);}
 
     public function hasChild(): bool {return $this->hasChild;}
 
-    public function getChildren(): Pages {return $this->children;}
+    public function getChildren(): Sections {return $this->children;}
 
     public function getFSFile(): string {return $this->properties->get(Constants::KEY_FS_FILE, '');}
 
@@ -114,16 +111,16 @@ class Page implements JsonSerializable
                 }
                 if ($this->properties->has('children')) {
                     $children = $this->properties->get('children');
-                    $this->children = new Pages(empty($children) ? [] : $children);
+                    $this->children = new Sections(empty($children) ? [] : $children);
                     $this->hasChild = empty($children);
                 }
                 else {
-                    $this->children = new Pages([]);
+                    $this->children = new Sections([]);
                 }
                 $this->properties->set(Constants::KEY_FS_FILE, $fsFile);
             }
             else {
-                new Error('Page\'s path is required, but missing: '.$properties, 500);
+                new Error('Component\' path is required, but missing: '.$properties, 500);
             }
             $this->properties->set('children',  $this->children);
             $this->properties->set('hasChild', !empty($this->children));

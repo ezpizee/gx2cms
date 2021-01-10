@@ -20,7 +20,7 @@ try {
         $context = $scanner->toArray();
         $context['basePage'] = Route::_('index.php?option=com_gx2cms');
         echo \GX2CMSJoomla\Hbs::render(
-            GX2CMS_COMP_ROOT.GX2CMS_DS.'asset'.GX2CMS_DS.'hbs'.GX2CMS_DS.'pages.hbs',
+            GX2CMS_COMP_ROOT.GX2CMS_DS.'asset'.GX2CMS_DS.'hbs'.GX2CMS_DS.'sections.hbs',
             $context,
             $root
         );

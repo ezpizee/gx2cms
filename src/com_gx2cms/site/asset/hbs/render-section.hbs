@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{page.title}} > {{section.title}}</title>
+    {{#if page.style}}<style type="text/css">{{{page.style}}}</style>{{/if}}
+    {{#if page.script}}<style type="text/css">{{{page.script}}}</style>{{/if}}
+</head>
+<body>
+{{#if section.selectors}}
+    <div style="float:left;margin-right:40px;width:250px;">
+        <label for="selector" style="display:block;margin-bottom:5px;">{{section.title}}'s models</label>
+        <select name="selector" id="selector"
+                style="border:1px solid #eee; display: block; padding: 5px; width: 200px"
+                onchange="window.location='{{urlPfx}}'+this.value">
+            <option value="">Select one</option>
+            {{#each section.selectors}}
+                {{#if this.selected}}
+                    <option value="{{this.value}}" selected>{{this.text}}</option>
+                {{else}}
+                    <option value="{{this.value}}">{{this.text}}</option>
+                {{/if}}
+            {{/each}}
+        </select>
+    </div>
+    <div style="margin-left: 291px">
+        {{{section.content}}}
+    </div>
+{{else}}
+    {{{section.content}}}
+{{/if}}
+</body>
+</html>

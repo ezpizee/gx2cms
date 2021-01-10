@@ -1,6 +1,6 @@
 <?php
 
-namespace GX2CMSJoomla\Page;
+namespace GX2CMSJoomla;
 
 use Ezpizee\Utils\ListModel;
 

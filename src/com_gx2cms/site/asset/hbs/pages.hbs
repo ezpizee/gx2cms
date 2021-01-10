@@ -1,0 +1,27 @@
+<h2>Pages from your GX2CMS Project</h2>
+<table>
+    <tr>
+        <td>Project name</td>
+        <td>{{project.name}}</td>
+    </tr>
+    <tr>
+        <td>Project description</td>
+        <td>{{project.description}}</td>
+    </tr>
+    <tr>
+        <td>Project root</td>
+        <td>{{projectRoot}}</td>
+    </tr>
+    <tr>
+        <td>Client</td>
+        <td>{{project.client}}</td>
+    </tr>
+</table>
+<hr />
+<ul>
+    {{#each pages}}
+        <li>
+            <a href="{{@root.basePage}}?layout=render&page={{path}}" target="new">{{currentPage.title}}</a>
+        </li>
+    {{/each}}
+</ul>

@@ -12,6 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 
 if (!defined('GX2CMS_DS')) {
     define('GX2CMS_DS', DIRECTORY_SEPARATOR);
+    define('GX2CMS_COMP_ROOT', __DIR__);
 }
 if (!defined('GX2CMS_ADMIN_COMP_ROOT')) {
     define('GX2CMS_ADMIN_COMP_ROOT', JPATH_ROOT . GX2CMS_DS . 'administrator' . GX2CMS_DS . 'components' . GX2CMS_DS . 'com_gx2cms');
@@ -25,6 +26,8 @@ else {
     \Ezpizee\ContextProcessor\CustomLoader::appendPackage([
         'GX2CMSJoomla' => GX2CMS_ADMIN_COMP_ROOT.GX2CMS_DS.'lib'.GX2CMS_DS.'src'
     ], true);
+
+    \Joomla\CMS\Factory::getDocument()->addScript(\Joomla\CMS\Uri\Uri::base().'/components/com_gx2cms/asset/js/script.js');
 
     // Get an instance of the controller prefixed by GX2CMS
     $controller = JControllerLegacy::getInstance('GX2CMS');

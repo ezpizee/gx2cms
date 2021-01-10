@@ -41,6 +41,7 @@
         <filename>gx2cms.php</filename>
         <filename>index.html</filename>
         <filename>router.php</filename>
+        <folder>asset</folder>
         <folder>views</folder>
     </files>
 
