@@ -1,6 +1,6 @@
 {
     "name": "webconsol/gx2cms",
-    "description": "GX2CMS Component",
+    "description": "GX2CMS is a templating framework for front-end developers to convert UI designs into different CMS-based ready code. It is running on Joomla",
     "type": "library",
     "keywords": [
         "Joomla",
@@ -9,7 +9,7 @@
         "WordPress",
         "Drupal"
     ],
-    "homepage": "https://github.com/WEBCONSOL/GX2CMS",
+    "homepage": "https://github.com/ezpizee/gx2cms",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

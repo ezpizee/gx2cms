@@ -15,21 +15,27 @@ REQUIREMENTS
 INSTALLATION
 ------------
 
- 1) Download one of our releases https://github.com/WEBCONSOL/GX2CMS/releases (the latest version recommended)
+1) Download one of our releases https://github.com/ezpizee/gx2cms/releases (the latest version recommended)
  
- 2) Unzip the download zip file
+2) Unzip the download zip file
  
- 3) Login to your Joomla! Administrator section
+3) Login to your Joomla! Administrator section
  
- 4) Go to **Extensions > Manage > Install**
+4) Go to **Extensions > Manage > Install**
 
- 5) Click on the **Upload Package File** tab
+5) Click on the **Upload Package File** tab
  
- 6) Upload /dist/ezpzlib.zip from the unzipped folder.
+6) Upload /dist/ezpzlib.zip from the unzipped folder.
  
- 7) Upload /dist/com_gx2cms.zip from the unzipped folder.
+7) Upload /dist/com_gx2cms.zip from the unzipped folder.
 
- 5) Wait until the installation is done, then click on the **Components > Ezpizee > Install**
+5) Wait until the installation is done, then click on the **Components > Ezpizee > Install**
+
+A HUGE THANK YOU TO
+-------------------
+
+1) `xamin/handlebars.php`
+2) `masterminds/html5`
 
 MAINTAINERS
 -----------
