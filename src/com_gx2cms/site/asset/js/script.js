@@ -9,13 +9,14 @@ var GX2CMS = function($){
             }
             else if (typeof jQuery !== "undefined") {
                 $ = jQuery;
+                init();
                 clearInterval($interval);
             }
             $intervalCount++;
         }, 100);
     }
 
-    that.renderSection = function(){
+    function renderSectionUrl() {
         var basePage = $('input[name="basePage"]').val();
         var layout = $('input[name="layout"]').val();
         var page = $('select[name="page"] option:selected').val();
@@ -24,26 +25,41 @@ var GX2CMS = function($){
             if (layout) {
                 if (page) {
                     if (section) {
-                        var url = window.location.protocol+'//'+
+                        return window.location.protocol+'//'+
                             window.location.host+basePage+'?layout='+layout+'&page='+page+'&section='+section;
-                        window.location = url;
                     }
                     else {
-                        alert("Section is required, but missing")
+                        alert("Section is required, but missing");
+                        return '#';
                     }
                 }
                 else {
-                    alert("Page is required, but missing")
+                    alert("Page is required, but missing");
+                    return '#';
                 }
             }
             else {
-                alert("Layout is required, but missing")
+                alert("Layout is required, but missing");
+                return '#';
             }
         }
         else {
-            alert("Base Page is required, but missing")
+            alert("Base Page is required, but missing");
+            return '#';
         }
-    };
+    }
+    
+    function init() {
+        $('#render-section').click(function(e){
+            //e.preventDefault();
+            var url = renderSectionUrl();
+            $(this).attr('href', url);
+            if (url === '#') {
+                return false;
+            }
+            return true;
+        });
+    }
 
     return that;
 
