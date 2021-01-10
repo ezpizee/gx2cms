@@ -5,6 +5,8 @@
     <li><a href="#folder-structure">Folder Structure</a></li>
     <li><a href="#partial-include">Partial Include</a></li>
     <li><a href="#include-resource">Include Resource</a></li>
+    <li><a href="#string-literal">String Literal</a></li>
+    <li><a href="#display-html">Display/Output HTML</a></li>
     <li><a href="#if-statement">IF Statement</a></li>
     <li><a href="#for-loop">For Loop</a></li>
 </ul>
@@ -17,7 +19,9 @@
 <ul>
     <li><b>bundle</b>. This is mainly used for PHP Model object.</li>
     <li><b>clientlib</b>. This is mainly used for global client library (CSS and JS).</li>
-    <li><b>config</b>. This should contain only global.json, which is used to maintain the structure of the site that you are working on.</li>
+    <li><b>config</b>. This should contain only global.json, which is used to maintain the structure 
+    of the site that you are working on. It is also used to keep the i18n.json file, which is used to mock
+     localized string for different languages.</li>
     <li><b>section</b>. This should be used to keep components, which can be reused in different pages..</li>
     <li><b>structure</b>. This should be used to keep all pages, which include components.</li>
 </ul>
@@ -27,7 +31,7 @@
 <h4 id="partial-include">Include Partial</h4>
 
 ```
-<sly data-sly-include="/path/to/the/partial/file.gx2cms"></sly></pre>
+<sly data-sly-include="/path/to/the/partial/file.gx2cms"></sly>
 ```
 
 <p>It is used to include partial script/code, which doesn't have its own context nor model.</p>
@@ -61,21 +65,32 @@ OR
 <h4 id="string-literal">String Literal</h4>
 
 ```
-${properties.test}</pre>
-```
+${properties.test}
 
+OR
+
+${'Hello World!'}
+
+OR
+
+${'Localized Hello World' @ i18n}
+```
 <p>It is used to display value of variable or a string</p>
 <hr />
+<h4 id="display-html">Display/Output HTML</h4>
+
+```
+${properties.somevar @ context='html'}
+```
+
 <h4 id="if-statement">If Statement</h4>
 
 ```
-<sly data-sly-test="${properties.exists}"></sly>
-    <div class="test">
-        ${properties.displaySomeThing}
-        <p class="test">
- Any thing can go inside the IF-STATEMENT block.
-        </p>
-    </div>
+<sly data-sly-test="${properties.exists}">
+    <p>Do something</p>
+</sly>
+<sly data-sly-test="${!properties.exists}">
+    <p>Do something else</p>
 </sly>
 ```
 <p>It is used like any IF-STATEMENT</p>
