@@ -72,7 +72,7 @@ if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelecto
         json_decode(file_get_contents($sectionConfig), true),
         json_decode(file_get_contents($sectionModel), true)
     );
-    if (sizeof($sectionSelectors) > 1) {
+    if (sizeof($sectionSelectors) > 0) {
         $sectionProperties['selectors'] = [];
         foreach ($sectionSelectors as $modelFile) {
             $modelFile = pathinfo($modelFile, PATHINFO_FILENAME);
