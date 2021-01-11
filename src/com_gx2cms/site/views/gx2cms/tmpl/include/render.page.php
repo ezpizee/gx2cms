@@ -19,13 +19,13 @@ if (!empty($scanner) && !empty($page) && !empty($root))
     $page = $scanner->getPages()->getChild($page);
     $properties = $page->getProperties()->getAsArray();
     Hbs::setGlobalContext(array_merge(
-        ['currentPage' => isset($properties['properties']) ? $properties['properties'] : $properties],
+        isset($properties['properties']) ? $properties['properties'] : $properties,
         ['renderPage' => $renderPage],
-        $scanner->getGlobalConfigData()
+        ['global' => $scanner->getGlobalConfigData()]
     ));
     die(Hbs::render(
         $page->getFSFile(),
-        $properties,
+        Hbs::getGlobalContext(),
         $root
     ));
 }

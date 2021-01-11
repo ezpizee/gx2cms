@@ -11,10 +11,12 @@
 defined('_JEXEC') or die('Restricted access');
 
 use GX2CMSJoomla\Exception\Error;
+use GX2CMSJoomla\Hbs;
 use GX2CMSJoomla\Scanner;
 use Joomla\CMS\Factory;
 
 try {
+    Hbs::setProcessor('GX2CMS');
     $input = Factory::getApplication()->input;
     $root = $this->getMenuParam('gx2cms_project_root');
     $imagePath = $input->getString('imagePath');

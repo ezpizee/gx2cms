@@ -13,6 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 use GX2CMSJoomla\Constants as GX2CMSConstants;
 use GX2CMSJoomla\Exception\Error;
 use GX2CMSJoomla\Hbs;
+use HandlebarsHelpers\Processors\Processor;
 use HandlebarsHelpers\Utils\ClientlibManager;
 use HandlebarsHelpers\Utils\FileExtension;
 use Joomla\CMS\Router\Route;
@@ -49,24 +50,28 @@ if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelecto
     // Page's clientlib
     $pageProperties = json_decode(file_get_contents($pageConfig), true);
     $clientlib = pathinfo($root, PATHINFO_FILENAME);
-    $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::CSS);
-    $pageProperties['style'] = $clientLibManager->getContent();
+    $pageProperties['style'] = '';
+    $pageProperties['script'] = '';
+    if (file_exists($root.'/clientlib/'.$clientlib)) {
+        $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::CSS);
+        $pageProperties['style'] = $clientLibManager->getContent();
+    }
 
     $pageClientLib = $page.GX2CMS_DS.'clientlib';
-    if (file_exists($root.$pageClientLib.'.'.FileExtension::CSS)) {
+    if (file_exists($root.$pageClientLib)) {
         $clientLibManager = new ClientlibManager($root, $pageClientLib . '.' . FileExtension::CSS);
         $pageProperties['style'] .= $clientLibManager->getContent();
     }
-    if (file_exists($root.$pageClientLib.'.'.FileExtension::JS)) {
+    if (file_exists($root.$pageClientLib)) {
         $clientLibManager = new ClientlibManager($root, $pageClientLib.'.'.FileExtension::JS);
         $pageProperties['script'] .= $clientLibManager->getContent();
     }
-    if (file_exists($root.'/clientlib/'.$clientlib.'.'.FileExtension::JS)) {
+    if (file_exists($root.'/clientlib/'.$clientlib)) {
         $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::JS);
         $pageProperties['script'] = $clientLibManager->getContent();
     }
 
-    \HandlebarsHelpers\Utils\Processor::processAssetInCSS($pageProperties['style'], ['renderPage'=>$renderPage]);
+    Processor::processAssetInCSS($pageProperties['style'], ['renderPage'=>$renderPage]);
 
     // Section
     $sectionSelectors = glob(str_replace(GX2CMS_DS.GX2CMS_DS, GX2CMS_DS,
