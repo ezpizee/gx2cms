@@ -53,13 +53,18 @@ if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelecto
     $pageProperties['style'] = $clientLibManager->getContent();
 
     $pageClientLib = $page.GX2CMS_DS.'clientlib';
-    $clientLibManager = new ClientlibManager($root, $pageClientLib.'.'.FileExtension::CSS);
-    $pageProperties['style'] .= $clientLibManager->getContent();
-
-    $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::JS);
-    $pageProperties['script'] = $clientLibManager->getContent();
-    $clientLibManager = new ClientlibManager($root, $pageClientLib.'.'.FileExtension::JS);
-    $pageProperties['script'] .= $clientLibManager->getContent();
+    if (file_exists($root.$pageClientLib.'.'.FileExtension::CSS)) {
+        $clientLibManager = new ClientlibManager($root, $pageClientLib . '.' . FileExtension::CSS);
+        $pageProperties['style'] .= $clientLibManager->getContent();
+    }
+    if (file_exists($root.$pageClientLib.'.'.FileExtension::JS)) {
+        $clientLibManager = new ClientlibManager($root, $pageClientLib.'.'.FileExtension::JS);
+        $pageProperties['script'] .= $clientLibManager->getContent();
+    }
+    if (file_exists($root.'/clientlib/'.$clientlib.'.'.FileExtension::JS)) {
+        $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::JS);
+        $pageProperties['script'] = $clientLibManager->getContent();
+    }
 
     \HandlebarsHelpers\Utils\Processor::processAssetInCSS($pageProperties['style'], ['renderPage'=>$renderPage]);
 
