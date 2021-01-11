@@ -46,14 +46,24 @@ if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelecto
         new Error('Section model: '.$sectionModel.' does not exist', 500);
     }
 
+    // Page's clientlib
     $pageProperties = json_decode(file_get_contents($pageConfig), true);
     $clientlib = pathinfo($root, PATHINFO_FILENAME);
-    $pageClientLib = $root.$page.GX2CMS_DS.'clientlib'.GX2CMS_DS.$clientlib;
     $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::CSS);
     $pageProperties['style'] = $clientLibManager->getContent();
+
+    $pageClientLib = $page.GX2CMS_DS.'clientlib';
+    $clientLibManager = new ClientlibManager($root, $pageClientLib.'.'.FileExtension::CSS);
+    $pageProperties['style'] .= $clientLibManager->getContent();
+
     $clientLibManager = new ClientlibManager($root, '/clientlib/'.$clientlib.'.'.FileExtension::JS);
     $pageProperties['script'] = $clientLibManager->getContent();
+    $clientLibManager = new ClientlibManager($root, $pageClientLib.'.'.FileExtension::JS);
+    $pageProperties['script'] .= $clientLibManager->getContent();
 
+    \HandlebarsHelpers\Utils\Processor::processAssetInCSS($pageProperties['style'], ['renderPage'=>$renderPage]);
+
+    // Section
     $sectionSelectors = glob(str_replace(GX2CMS_DS.GX2CMS_DS, GX2CMS_DS,
             $root.GX2CMS_DS.$section).GX2CMS_DS.'model'.GX2CMS_DS.'*.json');
     $sectionFile = str_replace(GX2CMS_DS.GX2CMS_DS, GX2CMS_DS,
