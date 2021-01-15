@@ -53,6 +53,7 @@ catch (Exception $e) {
                     <li><a href="#display-html">Display/Output HTML</a></li>
                     <li><a href="#if-statement">IF Statement</a></li>
                     <li><a href="#for-loop">For Loop</a></li>
+                    <li><a href="#conditional-statment">Conditional Statement</a></li>
                     <li><a href="#work-with-css-js">How to work CSS & JS</a></li>
                     <li><a href="#work-with-image">How to work images and files</a></li>
                 </ul>
@@ -61,6 +62,7 @@ catch (Exception $e) {
                 <h4 id="file-ext">File extension</h4>
                 <p><b>.gx2cms</b></p>
                 <hr />
+
                 <h4 id="folder-structure">Folder structure</h4>
                 <p>In your project, you should have root level folders like below:</p>
                 <ul>
@@ -74,13 +76,13 @@ catch (Exception $e) {
                 </ul>
                 <p>See example project here: <a href="https://github.com/ezpizee/gx2cms/blob/master/dist/com_gx2cms.zip" target="_blank">Example Project</a></p>
                 <p><img class="width-300" src="<?php echo Uri::base();?>components/com_gx2cms/asset/images/folder-structure.png" alt="folder-structure" /></p>
-                <div class="text-right"><a href="#backtotop">Go to top</a></div>
                 <hr />
+
                 <h4 id="partial-include">Include Partial</h4>
                 <pre>&lt;sly data-sly-include="/path/to/the/partial/file.gx2cms"&gt;&lt;/sly&gt;</pre>
                 <p>It is used to include partial script/code, which doesn't have its own context nor model.</p>
-                <div class="text-right"><a href="#backtotop">Go to top</a></div>
                 <hr />
+
                 <h4 id="include-resource">Include Resource</h4>
                 <pre>
 &lt;sly data-sly-resource="${'/path/to/the/component'}"&gt;&lt;/sly&gt;
@@ -105,6 +107,7 @@ OR
                     If it doesn't exist there, it will look in /section/{component-folder}/model.
                 </p>
                 <hr />
+
                 <h4 id="string-literal">String Literal</h4>
                 <pre>
 ${properties.test}
@@ -118,8 +121,8 @@ OR
 ${'Localized Hello World' @ i18n}
             </pre>
                 <p>It is used to display value of variable or a string</p>
-                <div class="text-right"><a href="#backtotop">Go to top</a></div>
                 <hr />
+
                 <h4 id="display-html">Display/Output HTML</h4>
                 <pre>${properties.someRichtextVar @ context='html'}</pre>
                 <h4 id="if-statement">If Statement</h4>
@@ -133,6 +136,7 @@ ${'Localized Hello World' @ i18n}
             </pre>
                 <p>It is used like any IF-STATEMENT</p>
                 <hr />
+
                 <h4 id="for-loop">For Loop</h4>
                 <pre>
 &lt;sly data-sly-test="${properties.list}"&gt;&lt;/sly&gt;
@@ -144,7 +148,21 @@ ${'Localized Hello World' @ i18n}
 &lt;/sly&gt;
             </pre>
                 <p>It is used like any FOR-LOOP</p>
-                <div class="text-right"><a href="#backtotop">Go to top</a></div>
+                <hr />
+
+                <h4 id="conditional-statment">Conditional Statement</h4>
+                <p>It is like conditional statement in any other languages</p>
+                <pre>
+${properties.exists ? properties.displayMe : properties.displaySomethingElse}
+
+${properties.exists ? 'Show something here' : properties.showSomeThingElse}
+
+${properties.exists ? (properties.propA ? properties.propA : properties.propB) : properties.showSomeThingElse}
+
+${properties.exists ? properties.showSomeThing : (properties.propX ? properties.propX : properties.propY)}
+                </pre>
+                <hr />
+
                 <h4 id="work-with-css-js">How to work CSS & JS</h4>
                 <p><b>Global CSS/JS</b> should be kept in:</p>
                 <ul>
@@ -177,6 +195,32 @@ ${'Localized Hello World' @ i18n}
                     <li><b>css.txt</b>, it is used to include any css files, which contained in the clientlib <b>css</b> folder, that you want to load</li>
                     <li><b>js.txt</b>, it is used to include any js files, which contained in the clientlib <b>js</b> folder, that you want to load</li>
                 </ul>
+                <p><b>Content of your css.txt and js.txt</b></p>
+                <p>
+                    <b>Example file and folder structure:</b><br />
+                    - /clientlib/test/css<br />
+                    - /clientlib/test/css/bootstrap.css<br />
+                    - /clientlib/test/css/custom_css_file.css<br />
+                    - /clientlib/test/css/custom_less_file.less<br />
+                    - /clientlib/test/css.txt<br />
+                    - /clientlib/test/js<br />
+                    - /clientlib/test/js/jquery.js<br />
+                    - /clientlib/test/js/bootstrap.js<br />
+                    - /clientlib/test/js/custom.js<br />
+                    - /clientlib/test/js.txt<br />
+                </p>
+                <p><b>Content of /clientlib/test/css.txt</b> (any file cotained in the css.txt will be loaded in that order)</p>
+                <pre>
+css/bootstrap.css
+css/custom_less_file.less
+css/custom_css_file.css
+                </pre>
+                <p><b>Content of /clientlib/test/js.txt</b> (any file cotained in the js.txt will be loaded in that order)</p>
+                <pre>
+js/jquery.js
+js/bootstrap.js
+js/custom.js
+                </pre>
                 <p>Any images/icons/fonts that you want to include in your CSS (both global and page specific) should be kept in:</p>
                 <ul>
                     <li>/clientlib/{project-folder}/images for global</li>
@@ -184,7 +228,7 @@ ${'Localized Hello World' @ i18n}
                 </ul>
                 <p>You then can include them in your CSS code as you would do in a regular CSS development</p>
                 <hr />
-                <div class="text-right"><a href="#backtotop">Go to top</a></div>
+
                 <h4 id="work-with-image">How to work images and files</h4>
                 <p>You can place your images that you need for your project (besides those for clientlib)
                     any where under your project folder.</p>
@@ -220,6 +264,8 @@ OR (if you have imagePath property in your model)
 &lt;a href="${properties.imagePath}" title="my file" data-render-asset="file"&gt;My File&lt;/a&gt;
             </pre>
                 <p>Include <b>data-render-asset="file"</b> attribute to the href tag</p>
+                <hr/>
+
                 <div class="text-right"><a href="#backtotop">Go to top</a></div>
             </div>
         </div>

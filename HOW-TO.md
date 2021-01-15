@@ -2,16 +2,17 @@
 <div id="toc">
 <h4>Table of Content</h4>
 <ul>
-    <li><a href="#file-ext">File extension</a></li>
-    <li><a href="#folder-structure">Folder Structure</a></li>
-    <li><a href="#partial-include">Partial Include</a></li>
-    <li><a href="#include-resource">Include Resource</a></li>
-    <li><a href="#string-literal">String Literal</a></li>
-    <li><a href="#display-html">Display/Output HTML</a></li>
-    <li><a href="#if-statement">IF Statement</a></li>
-    <li><a href="#for-loop">For Loop</a></li>
-    <li><a href="#work-with-css-js">How to work CSS & JS</a></li>
-    <li><a href="#work-with-image">How to work images and files</a></li>
+<li><a href="#file-ext">File extension</a></li>
+<li><a href="#folder-structure">Folder Structure</a></li>
+<li><a href="#partial-include">Partial Include</a></li>
+<li><a href="#include-resource">Include Resource</a></li>
+<li><a href="#string-literal">String Literal</a></li>
+<li><a href="#display-html">Display/Output HTML</a></li>
+<li><a href="#if-statement">IF Statement</a></li>
+<li><a href="#for-loop">For Loop</a></li>
+<li><a href="#conditional-statment">Conditional Statement</a></li>
+<li><a href="#work-with-css-js">How to work CSS & JS</a></li>
+<li><a href="#work-with-image">How to work images and files</a></li>
 </ul>
 </div>
 <hr />
@@ -21,13 +22,13 @@
 <h4 id="folder-structure">Folder structure</h4>
 <p>In your project, you should have root level folders like below:</p>
 <ul>
-    <li><b>bundle</b>. This is mainly used for PHP Model object.</li>
-    <li><b>clientlib</b>. This is mainly used for global client library (CSS and JS).</li>
-    <li><b>config</b>. This should contain only global.json, which is used to maintain the structure 
-    of the site that you are working on. It is also used to keep the i18n.json file, which is used to mock
-     localized string for different languages.</li>
-    <li><b>section</b>. This should be used to keep components, which can be reused in different pages..</li>
-    <li><b>structure</b>. This should be used to keep all pages, which include components.</li>
+<li><b>bundle</b>. This is mainly used for PHP Model object.</li>
+<li><b>clientlib</b>. This is mainly used for global client library (CSS and JS).</li>
+<li><b>config</b>. This should contain only global.json, which is used to maintain the structure 
+of the site that you are working on. It is also used to keep the i18n.json file, which is used to mock
+ localized string for different languages.</li>
+<li><b>section</b>. This should be used to keep components, which can be reused in different pages..</li>
+<li><b>structure</b>. This should be used to keep all pages, which include components.</li>
 </ul>
 <p>See example project here:<a href="https://github.com/ezpizee/gx2cms/blob/master/dist/com_gx2cms.zip" target="_blank">Example Project</a></p>
 <p><img class="width-300" src="https://github.com/ezpizee/gx2cms/blob/master/src/com_gx2cms/admin/asset/images/folder-structure.png" alt="folder-structure" /></p>
@@ -48,22 +49,22 @@
 OR
 
 <sly data-sly-resource="${'/path/to/the/component'}"
-    data-model="test"></sly>
+data-model="test"></sly>
 
 OR
 
 <sly data-sly-resource="${'/path/to/the/component'}"
-    data-model="com.test.core.models.TestModel"></sly>
+data-model="com.test.core.models.TestModel"></sly>
 ```
 
 <p>
-     It is used to include component (in the section folder), which has its own context and model.
-    <br />
-     When there is no data-model, the default model to use for the include context is the
-     properties.json (located in the /section/{component-folder}/model).
-    <br />
-     When there data-model, the framework will look first in the<b>bundle</b> folder to see if it is a PHP model.
-     If it doesn't exist there, it will look in /section/{component-folder}/model.
+ It is used to include component (in the section folder), which has its own context and model.
+<br />
+ When there is no data-model, the default model to use for the include context is the
+ properties.json (located in the /section/{component-folder}/model).
+<br />
+ When there data-model, the framework will look first in the<b>bundle</b> folder to see if it is a PHP model.
+ If it doesn't exist there, it will look in /section/{component-folder}/model.
 </p>
 <hr />
 <h4 id="string-literal">String Literal</h4>
@@ -91,10 +92,10 @@ ${properties.someRichtextVar @ context='html'}
 
 ```html
 <sly data-sly-test="${properties.exists}">
-    <p>Do something</p>
+<p>Do something</p>
 </sly>
 <sly data-sly-test="${!properties.exists}">
-    <p>Do something else</p>
+<p>Do something else</p>
 </sly>
 ```
 <p>It is used like any IF-STATEMENT</p>
@@ -103,15 +104,30 @@ ${properties.someRichtextVar @ context='html'}
 
 ```html
 <sly data-sly-test="${properties.list}"></sly>
-    <ul class="my-list">
-        <sly data-sly-list="${properties.list}">
+<ul class="my-list">
+<sly data-sly-list="${properties.list}">
  <li>${itemList.index} - ${item.name}</li>
-        </sly>
-    </ul>
+</sly>
+</ul>
 </sly>
 ```
 <p>It is used like any FOR-LOOP</p>
 <hr />
+
+<h4 id="conditional-statment">Conditional Statement</h4>
+<p>It is like conditional statement in any other languages</p>
+
+```html
+${properties.exists ? properties.displayMe : properties.displaySomethingElse}
+
+${properties.exists ? 'Show something here' : properties.showSomeThingElse}
+
+${properties.exists ? (properties.propA ? properties.propA : properties.propB) : properties.showSomeThingElse}
+
+${properties.exists ? properties.showSomeThing : (properties.propX ? properties.propX : properties.propY)}
+```
+<hr />
+
 <h4 id="work-with-css-js">How to work CSS & JS</h4>
 <p><b>Global CSS/JS</b> should be kept in:</p>
 <ul>
@@ -146,7 +162,32 @@ or <b>/structure/home/clientlib/js</b>
 <li><b>css.txt</b>, it is used to include any css files, which contained in the clientlib <b>css</b> folder, that you want to load</li>
 <li><b>js.txt</b>, it is used to include any js files, which contained in the clientlib <b>js</b> folder, that you want to load</li>
 </ul>
-
+<p><b>Content of your css.txt and js.txt</b></p>
+<p>
+<b>Example file and folder structure:</b><br />
+- /clientlib/test/css<br />
+- /clientlib/test/css/bootstrap.css<br />
+- /clientlib/test/css/custom_css_file.css<br />
+- /clientlib/test/css/custom_less_file.less<br />
+- /clientlib/test/css.txt<br />
+- /clientlib/test/js<br />
+- /clientlib/test/js/jquery.js<br />
+- /clientlib/test/js/bootstrap.js<br />
+- /clientlib/test/js/custom.js<br />
+- /clientlib/test/js.txt<br />
+</p>
+<p><b>Content of /clientlib/test/css.txt</b> (any file cotained in the css.txt will be loaded in that order)</p>
+<pre>
+css/bootstrap.css
+css/custom_less_file.less
+css/custom_css_file.css
+</pre>
+<p><b>Content of /clientlib/test/js.txt</b> (any file cotained in the js.txt will be loaded in that order)</p>
+<pre>
+js/jquery.js
+js/bootstrap.js
+js/custom.js
+</pre>
 <p>Any images/icons/fonts that you want to include in your CSS (both global and page specific) should be kept in:</p>
 <ul>
 <li>/clientlib/{project-folder}/images for global</li>
