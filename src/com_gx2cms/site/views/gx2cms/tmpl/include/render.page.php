@@ -15,7 +15,6 @@ use Joomla\CMS\Router\Route;
 
 if (!empty($scanner) && !empty($page) && !empty($root))
 {
-    $renderPage = Route::_('index.php?option=com_gx2cms&layout=render');
     $page = $scanner->getPages()->getChild($page);
     $properties = $page->getProperties()->getAsArray();
     Hbs::setGlobalContext(array_merge(

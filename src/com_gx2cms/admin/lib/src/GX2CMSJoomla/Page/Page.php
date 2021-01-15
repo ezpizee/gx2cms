@@ -120,7 +120,7 @@ class Page implements JsonSerializable
                 else {
                     $this->children = new Pages([]);
                 }
-                $this->properties->set(Constants::KEY_FS_FILE, $fsFile);
+                $this->properties->set(Constants::KEY_FS_FILE, str_replace(GX2CMS_DS.GX2CMS_DS, GX2CMS_DS, $fsFile));
             }
             else {
                 new Error('Page\'s path is required, but missing: '.$properties, 500);
