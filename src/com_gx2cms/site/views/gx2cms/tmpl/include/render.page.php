@@ -11,7 +11,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 use GX2CMSJoomla\Hbs;
-use Joomla\CMS\Router\Route;
 
 if (!empty($scanner) && !empty($page) && !empty($root))
 {

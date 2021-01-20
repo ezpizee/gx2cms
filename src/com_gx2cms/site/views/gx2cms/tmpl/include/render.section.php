@@ -14,8 +14,6 @@ use GX2CMSJoomla\Hbs;
 use GX2CMSJoomla\Section\RenderSection;
 use HandlebarsHelpers\Processors\Processor;
 
-if (!isset($root)) {$root = '';}
-
 if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelector))
 {
     $tmpl = GX2CMS_COMP_ROOT.GX2CMS_DS.'asset'.GX2CMS_DS.'hbs'.GX2CMS_DS.'render-section.hbs';

@@ -21,8 +21,17 @@ try {
     Hbs::setProcessor('GX2CMS');
     $input = Factory::getApplication()->input;
     $root = $this->getMenuParam('gx2cms_project_root');
-    $clientlib = $input->getString('clientlib');
-    if ($clientlib) {
+    if (!empty($input->get('servlet'))) {
+        $requestMethod = strtoupper($input->getMethod());
+        $servlet = $input->getString('servlet');
+        include_once __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.servlet.php';
+    }
+    else if (!empty($input->get('model'))) {
+        $model = $input->getString('model');
+        include_once __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.model.php';
+    }
+    else if (!empty($input->get('clientlib'))) {
+        $clientlib = $input->getString('clientlib');
         $type = $input->getString('type');
         if (in_array($type, ['css', 'js'])) {
             include_once __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.clientlib.php';
@@ -31,38 +40,33 @@ try {
             throw new RuntimeException('Invalid type for the clientlib request', 500);
         }
     }
-    else {
+    else if (!empty($input->get('imagePath'))) {
         $imagePath = $input->getString('imagePath');
-        if (!empty($imagePath)) {
-            include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.image.php';
+        include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.image.php';
+    }
+    else if (!empty($input->get('filePath'))) {
+        $filePath = $input->getString('filePath');
+        include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.file.php';
+    }
+    else {
+        $layout = $input->getString('layout', 'render');
+        $scanner = new Scanner($root);
+        $page = $input->getString('page', '');
+        $section = $input->getString('section', '');
+        $sectionSelector = $input->getString('selector', '');
+        if (empty($sectionSelector)) {
+            $sectionSelector = 'properties';
         }
-        else {
-            $filePath = $input->getString('filePath');
-            if (!empty($filePath)) {
-                include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.file.php';
+        if (!empty($page)) {
+            if (!empty($section)) {
+                include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.section.php';
             }
             else {
-                $layout = $input->getString('layout', 'render');
-                $scanner = new Scanner($root);
-                $page = $input->getString('page', '');
-                $section = $input->getString('section', '');
-                $sectionSelector = $input->getString('selector', '');
-                if (empty($sectionSelector)) {
-                    $sectionSelector = 'properties';
-                }
-
-                if (!empty($page)) {
-                    if (!empty($section)) {
-                        include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.section.php';
-                    }
-                    else {
-                        include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.page.php';
-                    }
-                }
-                else {
-                    new Error('Page Not Found', 404);
-                }
+                include __DIR__.GX2CMS_DS.'include'.GX2CMS_DS.'render.page.php';
             }
+        }
+        else {
+            new Error('Page Not Found', 404);
         }
     }
 }
