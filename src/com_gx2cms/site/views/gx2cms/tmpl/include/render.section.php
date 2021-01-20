@@ -30,5 +30,6 @@ if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelecto
     $context['urlPfx'] = $renderPage.'&page='.$page.'&section='.$section;
     $content = Hbs::render($tmpl, $context, $root);
     Processor::processAssetTag($content, ['renderPage'=>$renderPage]);
+    Processor::putBackIgnore($content);
     die($content);
 }

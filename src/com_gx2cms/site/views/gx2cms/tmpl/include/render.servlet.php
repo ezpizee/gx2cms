@@ -10,6 +10,7 @@
 // No direct access to this file
 use Ezpizee\Utils\Request;
 use Ezpizee\Utils\ResponseCodes;
+use Ezpizee\ContextProcessor\CustomLoader;
 use GX2CMSJoomla\Exception\Error;
 use GX2CMS\Project\Servlet;
 
@@ -29,6 +30,12 @@ if (!empty($root) && is_string($root) && !empty($servlet) && !empty($requestMeth
     }
     if (!class_exists($namespace, false)) {
         new Error('Servlet '.$servlet.' does not exist', ResponseCodes::CODE_ERROR_ITEM_NOT_FOUND);
+    }
+    $servletFirstBit = explode($dot, $servlet)[0];
+    if (!CustomLoader::packageExists($servletFirstBit)) {
+        CustomLoader::appendPackage([
+            $servletFirstBit => $root.GX2CMS_DS.'bundle'
+        ]);
     }
     $class = new $namespace();
     if ($class instanceof Servlet) {

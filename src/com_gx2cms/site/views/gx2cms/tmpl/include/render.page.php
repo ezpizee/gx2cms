@@ -11,6 +11,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 use GX2CMSJoomla\Hbs;
+use HandlebarsHelpers\Processors\Processor;
 
 if (!empty($scanner) && !empty($page) && !empty($root))
 {
@@ -21,9 +22,7 @@ if (!empty($scanner) && !empty($page) && !empty($root))
         ['renderPage' => $renderPage],
         ['global' => $scanner->getGlobalConfigData()]
     ));
-    die(Hbs::render(
-        $page->getFSFile(),
-        Hbs::getGlobalContext(),
-        $root
-    ));
+    $html = Hbs::render($page->getFSFile(), Hbs::getGlobalContext(), $root);
+    Processor::putBackIgnore($html);
+    die($html);
 }
