@@ -85,16 +85,16 @@ catch (Exception $e) {
 
                 <h4 id="include-resource">Include Resource</h4>
                 <pre>
-&lt;sly data-sly-resource="${'/path/to/the/component'}"&gt;&lt;/sly&gt;
+&lt;sly data-sly-resource="${'node1' @ resourceType='/path/to/the/component'}"&gt;&lt;/sly&gt;
 
 OR
 
-&lt;sly data-sly-resource="${'/path/to/the/component'}"
+&lt;sly data-sly-resource="${'node2' @ resourceType='/path/to/the/component'}"
     data-model="test"&gt;&lt;/sly&gt;
 
 OR
 
-&lt;sly data-sly-resource="${'/path/to/the/component'}"
+&lt;sly data-sly-resource="${'node3' @ resourceType='/path/to/the/component'}"
     data-model="com.test.core.models.TestModel"&gt;&lt;/sly&gt;
             </pre>
                 <p>

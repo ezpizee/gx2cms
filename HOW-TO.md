@@ -44,16 +44,16 @@ of the site that you are working on. It is also used to keep the i18n.json file,
 <h4 id="include-resource">Include Resource</h4>
 
 ```html
-<sly data-sly-resource="${'/path/to/the/component'}"></sly>
+<sly data-sly-resource="${'node1' @ resourceType='/path/to/the/component'}"></sly>
 
 OR
 
-<sly data-sly-resource="${'/path/to/the/component'}"
+<sly data-sly-resource="${'node2' @ resourceType='/path/to/the/component'}"
 data-model="test"></sly>
 
 OR
 
-<sly data-sly-resource="${'/path/to/the/component'}"
+<sly data-sly-resource="${'node3' @ resourceType='/path/to/the/component'}"
 data-model="com.test.core.models.TestModel"></sly>
 ```
 
