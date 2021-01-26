@@ -22,7 +22,14 @@ if (!empty($scanner) && !empty($page) && !empty($root))
         ['renderPage' => $renderPage],
         ['global' => $scanner->getGlobalConfigData()]
     ));
+    $wcag = isset($scanner->getGlobalConfigData()['wcag']) ? $scanner->getGlobalConfigData()['wcag'] : 'na';
     $html = Hbs::render($page->getFSFile(), Hbs::getGlobalContext(), $root);
     Processor::putBackIgnore($html);
+    $pattern = ['<body','</body>'];
+    $replace = ['<body data-wcag="'.$wcag.'"','<script src="https://cdn.ezpz.solutions/accessibility.min.js"></script></body>'];
+    $html = str_replace($pattern, $replace, $html);
+    $pattern = '</head>';
+    $replace = '<link rel="stylesheet" href="https://cdn.ezpz.solutions/accessibility.min.css" type="text/css"></head>';
+    $html = str_replace($pattern, $replace, $html);
     die($html);
 }

@@ -26,10 +26,17 @@ if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelecto
         $section,
         $sectionSelector
     );
+    $wcag = isset($scanner->getGlobalConfigData()['wcag']) ? $scanner->getGlobalConfigData()['wcag'] : 'na';
     $context = $sectionRenderer->getContext();
     $context['urlPfx'] = $renderPage.'&page='.$page.'&section='.$section;
     $content = Hbs::render($tmpl, $context, $root);
     Processor::processAssetTag($content, ['renderPage'=>$renderPage]);
     Processor::putBackIgnore($content);
+    $pattern = ['<body','</body>'];
+    $replace = ['<body data-wcag="'.$wcag.'"','<script src="https://cdn.ezpz.solutions/accessibility.min.js"></script></body>'];
+    $content = str_replace($pattern, $replace, $content);
+    $pattern = '</head>';
+    $replace = '<link rel="stylesheet" href="https://cdn.ezpz.solutions/accessibility.min.css" type="text/css"></head>';
+    $content = str_replace($pattern, $replace, $content);
     die($content);
 }
