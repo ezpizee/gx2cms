@@ -2,7 +2,7 @@
 
 namespace GX2CMSJoomla;
 
-use HandlebarsHelpers\Hbs as BaseHbs;
+use Handlebars\Engine\Hbs as BaseHbs;
 
 class Hbs extends BaseHbs
 {

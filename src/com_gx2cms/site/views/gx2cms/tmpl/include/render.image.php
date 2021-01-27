@@ -10,7 +10,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-use HandlebarsHelpers\Utils\DigitalAssetRenderer;
+use Handlebars\Utils\DigitalAssetRenderer;
 
 if (!empty($imagePath) && !empty($root))
 {

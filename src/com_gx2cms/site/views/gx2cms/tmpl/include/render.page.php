@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 use GX2CMSJoomla\Hbs;
-use HandlebarsHelpers\Processors\Processor;
+use Handlebars\Processors\Processor;
 
 if (!empty($scanner) && !empty($page) && !empty($root))
 {

@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 
 use GX2CMSJoomla\Hbs;
 use GX2CMSJoomla\Section\RenderSection;
-use HandlebarsHelpers\Processors\Processor;
+use Handlebars\Processors\Processor;
 
 if (!empty($page) && !empty($section) && !empty($root) && !empty($sectionSelector))
 {

@@ -8,8 +8,8 @@
  */
 
 // No direct access to this file
-use HandlebarsHelpers\Utils\ClientlibManager;
-use HandlebarsHelpers\Processors\Processor;
+use Handlebars\Utils\ClientlibManager;
+use Handlebars\Processors\Processor;
 
 defined('_JEXEC') or die('Restricted access');
 

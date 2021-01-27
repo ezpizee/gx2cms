@@ -8,7 +8,7 @@
  */
 
 // No direct access to this file
-use HandlebarsHelpers\Utils\DigitalAssetRenderer;
+use Handlebars\Utils\DigitalAssetRenderer;
 
 defined('_JEXEC') or die('Restricted access');
 
