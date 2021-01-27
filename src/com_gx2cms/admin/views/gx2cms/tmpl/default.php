@@ -12,6 +12,7 @@ use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die('Restricted Access');
+
 try {
     $siteName = Factory::getApplication()->get('sitename');
 }
@@ -56,6 +57,7 @@ catch (Exception $e) {
                     <li><a href="#conditional-statment">Conditional Statement</a></li>
                     <li><a href="#work-with-css-js">How to work CSS & JS</a></li>
                     <li><a href="#work-with-image">How to work images and files</a></li>
+                    <li><a href="#parsys">What is paragraph system or parsys?</a></li>
                 </ul>
             </div>
             <div class="toc-content">
@@ -264,9 +266,58 @@ OR (if you have imagePath property in your model)
 &lt;a href="${properties.imagePath}" title="my file" data-render-asset="file"&gt;My File&lt;/a&gt;
             </pre>
                 <p>Include <b>data-render-asset="file"</b> attribute to the href tag</p>
-                <hr/>
 
+                <hr/>
                 <div class="text-right"><a href="#backtotop">Go to top</a></div>
+                <h4 id="parsys">What is paragraph system or parsys?</h4>
+                <p>Paragraph system or parsys is like a container which allows user to drag other components to drop on it in order to composer content.</p>
+                <p>There are three types of parsys. They have their own meanings in AEM, but for GX2CMS, they are all the same. You might use different one deppend on the requirement from backend Developer.</p>
+                <p>Here they are</p>
+
+                <pre>
+&lt;sly data-sly-resource="${'par' @ resourceType='/libs/foundation/components/parsys'}"&gt;&lt;/sly&gt;
+
+OR
+
+&lt;sly data-sly-resource="${'par' @ resourceType='/libs/wcm/foundation/components/parsys'}"&gt;&lt;/sly&gt;
+
+OR
+
+&gt;sly data-sly-resource="${'par' @ resourceType='/libs/wcm/foundation/components/iparsys'}"&gt;&lt;/sly&lt;
+                </pre>
+                <p>Then, in your model file (i.e. the properties.json file)</p>
+
+                <pre>
+{
+  "properties": {
+    "...": "..."
+  },
+  "parsys": [
+    {
+      "nodePath": "leftcol",
+      "resourceType": "/libs/wcm/foundation/components/parsys",
+      "children": [
+        {
+          "nodePath": "suicidal",
+          "resourceType": "/section/heading",
+          "model": "suicidal"
+        },
+        {
+          "nodePath": "suicidaldescription",
+          "resourceType": "/section/richtext",
+          "model": "suicidal-description"
+        }
+      ]
+    }
+  ]
+}
+                </pre>
+                <p><strong>Note:</strong></p>
+                <ul>
+                    <li>Use /libs/foundation/components/parsys in the model file, if in your gx2cms you use it.</li>
+                    <li>Use /libs/wcm/foundation/components/parsys in the model file, if in your gx2cms you use it.</li>
+                    <li>Use /libs/wcm/foundation/components/iparsys in the model file, if in your gx2cms you use it.</li>
+                </ul>
             </div>
         </div>
     </div>

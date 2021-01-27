@@ -13,6 +13,7 @@
 <li><a href="#conditional-statment">Conditional Statement</a></li>
 <li><a href="#work-with-css-js">How to work CSS & JS</a></li>
 <li><a href="#work-with-image">How to work images and files</a></li>
+<li><a href="#parsys">What is paragraph system or parsys?</a></li>
 </ul>
 </div>
 <hr />
@@ -231,3 +232,56 @@ OR (if you have imagePath property in your model)
 ```
 
 <p>Include <b>data-render-asset="file"</b> attribute to the href tag</p>
+<hr />
+
+<h4 id="parsys">What is paragraph system or parsys?</h4>
+<p>Paragraph system or parsys is like a container which allows user to drag other components to drop on it in order to composer content.</p>
+<p>There are three types of parsys. They have their own meanings in AEM, but for GX2CMS, they are all the same. You might use different one deppend on the requirement from backend Developer.</p>
+<p>Here they are</p>
+
+```html
+<sly data-sly-resource="${'par' @ resourceType='/libs/foundation/components/parsys'}"></sly>
+
+OR
+
+<sly data-sly-resource="${'par' @ resourceType='/libs/wcm/foundation/components/parsys'}"></sly>
+
+OR
+
+<sly data-sly-resource="${'par' @ resourceType='/libs/wcm/foundation/components/iparsys'}"></sly>
+```
+
+<p>Then, in your model file (i.e. the properties.json file)</p>
+
+```json
+{
+  "properties": {
+    "...": "..."
+  },
+  "parsys": [
+    {
+      "nodePath": "leftcol",
+      "resourceType": "/libs/wcm/foundation/components/parsys",
+      "children": [
+        {
+          "nodePath": "suicidal",
+          "resourceType": "/section/heading",
+          "model": "suicidal"
+        },
+        {
+          "nodePath": "suicidaldescription",
+          "resourceType": "/section/richtext",
+          "model": "suicidal-description"
+        }
+      ]
+    }
+  ]
+}
+```
+
+<p><strong>Note:</strong></p>
+<ul>
+<li>Use /libs/foundation/components/parsys in the model file, if in your gx2cms you use it.</li>
+<li>Use /libs/wcm/foundation/components/parsys in the model file, if in your gx2cms you use it.</li>
+<li>Use /libs/wcm/foundation/components/iparsys in the model file, if in your gx2cms you use it.</li>
+</ul>
