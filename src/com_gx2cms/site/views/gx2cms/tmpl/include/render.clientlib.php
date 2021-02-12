@@ -13,14 +13,16 @@ use Handlebars\Processors\Processor;
 
 defined('_JEXEC') or die('Restricted access');
 
-if (!empty($root) && !empty($clientlib) && !empty($type))
+if (!empty($root) && !empty($clientlib) && !empty($type) && isset($renderPage))
 {
     $q = $clientlib.'.'.$type;
     $clientLibManager = new ClientlibManager($root, $q);
     $clientLibManager->setRenderHeaderContentType();
     $content = $clientLibManager->getContent();
     Processor::processAssetInCSS($content, [
-        'renderPage' => $renderPage
+        'renderPage' => $renderPage,
+        'root' => $root,
+        'clientlibRoot' => dirname($q).DS.pathinfo($q, PATHINFO_FILENAME)
     ]);
     die($content);
 }
