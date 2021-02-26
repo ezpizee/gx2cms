@@ -56,7 +56,7 @@ catch (Exception $e) {
                     <li><a href="#for-loop">For Loop</a></li>
                     <li><a href="#conditional-statment">Conditional Statement</a></li>
                     <li><a href="#work-with-css-js">How to work CSS & JS</a></li>
-                    <li><a href="#work-with-image">How to work images and files</a></li>
+                    <li><a href="#work-with-image">How to work images, files, and links</a></li>
                     <li><a href="#parsys">What is paragraph system or parsys?</a></li>
                 </ul>
             </div>
@@ -267,6 +267,11 @@ OR (if you have imagePath property in your model)
             </pre>
                 <p>Include <b>data-render-asset="file"</b> attribute to the href tag</p>
 
+                <p>Here is how to link to an page/structure:</p>
+
+                <pre>
+&lt;a href="/path/to/url/structure" title="my file" data-href-page="/path/to/url/structure"&gt;My Link&lt;/a&gt;
+                </pre>
                 <hr/>
                 <div class="text-right"><a href="#backtotop">Go to top</a></div>
                 <h4 id="parsys">What is paragraph system or parsys?</h4>
